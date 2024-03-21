@@ -1,1 +1,35 @@
+trigger:
+- sdk
 
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+- task: browserstackcom.browserstack-vsts-extension.browserstack-config-task.BrowserStackConfig@0
+  displayName: 'BrowserStack configuration setup'
+  inputs:
+    BrowserStackServiceEndPoint: 'service-connection-yatin-demo'
+
+- task: DotNetCoreCLI@2
+  name: 'RestoreProject'
+  displayName: 'Restore Project'
+  inputs:
+    command: 'restore'
+    feedsToUse: 'select'
+
+- task: DotNetCoreCLI@2
+  name: 'BuildProject'
+  displayName: 'Build Project'
+  
+
+
+- task: DotNetCoreCLI@2
+  name: 'TestProjectBuild'
+  displayName: 'Run Tests'
+  inputs:
+    command: 'test'
+    arguments: '--filter "Category=sample-test"'
+  continueOnError: true
+  env:
+    BROWSERSTACK_BUILD_NAME: browserstack-examples-nunit
