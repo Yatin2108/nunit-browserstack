@@ -21,7 +21,8 @@ steps:
 - task: DotNetCoreCLI@2
   name: 'BuildProject'
   displayName: 'Build Project'
-  
+  inputs:
+    command: 'build'
 
 
 - task: DotNetCoreCLI@2
