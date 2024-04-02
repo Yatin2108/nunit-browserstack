@@ -38,5 +38,5 @@ steps:
 - task: PublishPipelineArtifact@1
   displayName: 'Publish Pipeline Artifact'
   inputs:
-    targetPath: ./Reports/output.html
+    targetPath: ./output.html
     artifact: 'Build Report'
